@@ -1,0 +1,251 @@
+CREATE DATABASE Spotify;
+
+use Spotify;
+
+
+CREATE TABLE musica (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cancion VARCHAR(100),
+    artista VARCHAR(100),
+    albun VARCHAR(100),
+    anio INT,
+    duracion_segundos INT
+);
+
+
+
+INSERT INTO musica (cancion, artista, albun, anio, duracion_segundos) VALUES
+('Caminos del alma', 'Los Andinos', 'Amanecer', 2010, 215),
+('Luces de la ciudad', 'Neón', 'Energía', 2015, 198),
+('Susurros de viento', 'Luna Roja', 'Brisa', 2012, 233),
+('Tiempos de fuego', 'Volcán', 'Calor interno', 2018, 256),
+('Eco eterno', 'Sonar', 'Infinito', 2020, 205),
+('Noche de estrellas', 'Galaxia', 'Universo', 2017, 221),
+('Corazón rebelde', 'Ráfaga del Sur', 'Pasión', 2014, 230),
+('Mar de cristal', 'Azul Profundo', 'Reflejos', 2013, 210),
+('Sol en la piel', 'Aurora', 'Despertar', 2019, 199),
+('Laberinto', 'Hexágono', 'Trampa', 2016, 240),
+('Sombras del ayer', 'Retrovox', 'Memorias', 2011, 190),
+('Alas rotas', 'Vuelo Bajo', 'Caída libre', 2010, 184),
+('Viaje sin fin', 'Horizonte', 'Destino', 2018, 245),
+('Danza solar', 'Fuego Interno', 'Ritmos del sol', 2016, 226),
+('Ecos del silencio', 'Silencio Sonoro', 'Mutis', 2013, 203),
+('Melodía urbana', 'Asfalto', 'Calles', 2019, 188),
+('Olas del sur', 'Brisa Marina', 'Marea', 2020, 217),
+('Cristales rotos', 'Espejo', 'Fragmentos', 2015, 239),
+('Tiempo detenido', 'Instante', 'Reloj de arena', 2011, 229),
+('Raíces', 'Folklorika', 'Origen', 2012, 210),
+('Brillando fuerte', 'Estelares', 'Luz', 2014, 220),
+('Lluvia suave', 'Nube Gris', 'Cielo', 2013, 198),
+('Tempestad', 'Trueno', 'Tormenta', 2018, 258),
+('Cielo profundo', 'Noche Azul', 'Galaxia II', 2020, 247),
+('Versos callados', 'Poetas Urbanos', 'Letras', 2016, 202),
+('Al final del túnel', 'Luz Baja', 'Esperanza', 2017, 232),
+('Notas del alma', 'Pentagrama', 'Música Viva', 2015, 208),
+('Amanecer dorado', 'Aurora Boreal', 'Horizonte Lejano', 2014, 216),
+('Travesía', 'Los Navegantes', 'Mapa Sonoro', 2010, 214),
+('Cicatrices', 'Heridas del Tiempo', 'Sanar', 2019, 187),
+('Grito interior', 'Silencio Roto', 'Desahogo', 2021, 234),
+('Ríos de tinta', 'Pluma Libre', 'Escribir', 2013, 199),
+('Paisaje', 'Tierra Lejana', 'Panorama', 2016, 200),
+('Velocidad', 'Máxima Potencia', 'Turbo', 2017, 223),
+('Líneas de fuga', 'Perspectiva', 'Geometría', 2020, 206),
+('Claroscuro', 'Luz y Sombra', 'Contrastes', 2012, 222),
+('Refugio', 'Los Montaña', 'Abrigo', 2018, 212),
+('Inercia', 'Movimiento', 'Física Sonora', 2011, 193),
+('Callejón sin salida', 'Esquina Perdida', 'Ciudad Vacía', 2015, 241),
+('Universo paralelo', 'Dimensión X', 'Multiverso', 2019, 250),
+('Latido', 'Pulso', 'Ritmo Vital', 2021, 207),
+('Fronteras', 'Sin Límites', 'Cruzar', 2010, 197),
+('Nómadas', 'Viajeros del Sonido', 'Ruta Musical', 2016, 235),
+('Horizonte rojo', 'Atardecer', 'Sol Poniente', 2018, 224),
+('Náufrago', 'Isla Lejana', 'Mar Abierto', 2013, 185),
+('Miradas', 'Reflejo', 'Ojos del Tiempo', 2017, 209),
+('Zonas grises', 'Neutralidad', 'Intermedio', 2012, 218),
+('Génesis', 'Comienzo', 'Inicio', 2014, 213),
+('Revolución', 'Cambio Radical', 'Nuevo Orden', 2020, 242),
+('Memorias del sur', 'Antiguos Ritmos', 'Recuerdos', 2011, 200),
+('Caída libre', 'Gravedad', 'Altura Cero', 2015, 196);
+
+
+#BSELECCIONA LA TABLA#
+select * FROM spotify.musica;
+
+#1.Mayor que (>) Mostrar canciones posteriores al año 2015.
+select * FROM spotify.musica where anio > 2015;
+
+#2.Menor que (<) Mostrar canciones con duración menor a 200 segundos.
+select * FROM spotify.musica where duracion_segundos < 200;
+
+#3. Distinto de (<>) Mostrar canciones cuyo artista no sea 'Aurora'.
+select * FROM spotify.musica where cancion <> 'Aurora';
+
+#4. Menor o igual que (<=) Mostrar canciones de año 2015 o anteriores.
+select * FROM spotify.musica where anio <= 2015;
+
+#5. Mayor o igual que (>=) Mostrar canciones con duración de 240 segundos o más.
+select * FROM spotify.musica where duracion_segundos >= 240;
+
+
+#6.Igual que (=) Mostrar todas las canciones del artista 'Neón'.
+select * FROM spotify.musica where artista = 'Neón';
+
+#7.BETWEEN Mostrar canciones publicadas entre 2012 y 2018 inclusive.
+select * FROM spotify.musica where anio between 2012 and 2018;
+
+#8.LIKE Mostrar canciones cuyo nombre comience con 'C'. Mostrar canciones que contengan la palabra 'sol'.***
+select * FROM spotify.musica where cancion LIKE 'c%'; 
+select * FROM spotify.musica where cancion LIKE '%sol%';
+
+
+#9.IN Mostrar canciones de los años 2010, 2015 o 2020.***
+select * FROM spotify.musica where anio in  (2010, 2015, 2020);
+
+#10.AND Mostrar canciones posteriores a 2015 Y con duración mayor a 230 segundos.
+select * FROM spotify.musica where anio > 2015 and duracion_segundos > 230;
+
+#11.OR Mostrar canciones del año 2010 O del año 2020.
+select * FROM spotify.musica where (anio = 2010) or (anio = 2020);
+
+#12.NOT Mostrar canciones que NO sean del artista 'Neón'.
+select * FROM spotify.musica where not artista = "Neón";
+
+#13.Combinado (AND + OR) Mostrar canciones del artista 'Aurora' Y del año 2019, O canciones de duración menor a 190 segundos.
+select * FROM spotify.musica where (artista = "Aurora" and anio = 2019) or (duracion_segundos < 190);
+
+
+CREATE TABLE persona1 (
+    id_persona INT PRIMARY KEY,
+    nombre VARCHAR(100)
+);
+
+
+create table pasaporte (
+id_pasaporte int primary key,
+id_persona int unique,
+foreign key (id_persona) references persona1(id_persona)
+);
+create table cliente (
+id_cliente int primary key,
+nombre varchar(100)
+);
+
+
+create table pedido (
+id_pedido int primary key,
+id_cliente int,
+fecha date,
+foreign key (id_cliente) references cliente(id_cliente)
+);
+
+create table inscripcion (
+id_estudiante int,
+id_curso int,
+fecha_inscripcion date,
+primary key (id_estudiante, id_curso),
+foreign key (id_estudiante) references estudiante(id_estudiante),
+foreign key (id_curso) references curso(id_curso)
+);
+
+CREATE TABLE musica_2 (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cancion VARCHAR(100),
+    artista VARCHAR(100),
+    album VARCHAR(100),
+    anio INT,
+    duracion INT, -- en segundos
+    fecha_lanzamiento DATE,
+    hora_estreno TIME,
+    descripcion TEXT,
+    email_contacto VARCHAR(100)
+);
+
+INSERT INTO musica_2 (cancion, artista, album, anio, duracion, fecha_lanzamiento, hora_estreno, descripcion, email_contacto) VALUES
+('Sol de verano', 'Luna García', 'Calor', 2020, 210, '2020-01-15', '10:00:00', 'Canción ideal para el verano, totalmente gratis.', 'luna@email.com'),
+('Amor eterno', 'Carlos Ríos', 'Romántico', 2019, 250, '2019-02-14', '20:30:00', 'Una balada que llega al alma.', NULL),
+('Ritmo salvaje', 'DJ Max', 'Fiesta', 2021, 180, '2021-05-10', '22:00:00', 'Perfecta para bailar toda la noche.', 'djmax@music.net'),
+('Lluvia de estrellas', 'Estela Azul', 'Galaxia', 2018, 160, '2018-11-22', '18:45:00', 'Una obra espacial sin comparación.', NULL),
+('Tiempos modernos', 'Retro Beat', 'Vintage', 2022, 240, '2022-03-30', '19:15:00', 'Sonidos clásicos en tiempos modernos.', 'contacto@retro.com'),
+('Fuego y pasión', 'Valentina Rey', 'Latidos', 2023, 200, '2023-07-01', '21:00:00', 'Romance ardiente y letras profundas.', 'valentina@rey.com');
+
+#1.CONCAT
+#Mostrar "cancion - artista" como un único campo
+SELECT CONCAT(cancion, ' - ', artista) AS 'cancion y artista'
+FROM musica_2;
+
+
+#2. COALESCE
+#Mostrar el email o "Sin contacto" si es NULL
+SELECT COALESCE(email_contacto, 'Sin contacto') AS contacto FROM musica_2;
+
+#3. DATEDIFF
+#Mostrar cuántos días pasaron desde el lanzamiento de cada canción
+SELECT DATEDIFF('2025-05-21', fecha_lanzamiento) AS dias_desde_lanzamiento FROM musica_2;
+
+
+ #4. TIMEDIFF
+ #Mostrar cuánto tiempo pasó desde la hora de estreno hasta las 23:59:59;
+ SELECT TIMEDIFF('23:59:59', hora_estreno) AS tiempo_final_dia from musica_2;
+ 
+ #5. EXTRACT
+#Extraer el año de la fecha de lanzamiento
+SELECT EXTRACT(YEAR FROM fecha_lanzamiento) AS anio FROM musica_2;
+
+
+#6 REPLACE
+# Reemplazar la palabra "gratis" por "sin costo" en las descripciones
+SELECT REPLACE(descripcion, 'gratis', 'sin costo') AS descripcion FROM musica_2;
+
+#7 DATE_FORMAT
+# Mostrar la fecha de lanzamiento con formato día/mes/año
+SELECT DATE_FORMAT(fecha_lanzamiento, '%d/%m/%Y') AS fecha_lanzamiento1 from musica_2;
+
+#8. DATE_ADD
+# Calcular la fecha de vencimiento de promoción agregando 30 días a la fecha de lanzamiento
+ SELECT cancion, DATE_ADD(fecha_lanzamiento, INTERVAL 30 DAY) AS promocion from musica_2;
+
+#9. DATE_SUB
+# Mostrar una fecha 15 días antes del lanzamiento
+ SELECT fecha_lanzamiento, DATE_SUB(fecha_lanzamiento, INTERVAL 15 DAY) AS fecha_anterior from musica_2;
+ 
+ #10. CASE
+# Clasificar la duración de cada tema como Corta, Media o Larga
+SELECT duracion,
+  CASE 
+    WHEN duracion < 180 THEN 'Corta'
+    WHEN duracion >= 180 AND duracion < 240 THEN 'Media'
+    ELSE 'Larga'
+  END AS categoria
+FROM musica_2;
+
+
+#11 Agregaciones: COUNT, AVG, SUM, MIN, MAX
+#Cantidad total de canciones
+#Promedio de duración
+#Suma total de duración
+#Canción más corta
+#Canción más larga
+
+SELECT
+    COUNT(*) AS cantidad_total_canciones
+FROM musica_2;
+
+SELECT
+    avg(duracion) AS promedio_Canciones
+FROM musica_2;
+
+SELECT
+    sum(duracion) AS promedio_Canciones
+FROM musica_2;
+
+SELECT min(cancion) as nombre, min(duracion) AS cancion_mas_corta
+FROM musica_2;
+
+SELECT max(cancion) as nombre, max(duracion) AS cancion_mas_larga
+FROM musica_2;
+
+#12 GROUP BY + agregaciones
+# Duración promedio por año
+SELECT anio, avg(duracion) AS promedio_Canciones 
+from musica_2
+group by anio;
