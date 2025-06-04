@@ -1,0 +1,141 @@
+#1.CONCAT
+#Mostrar "cancion - artista" como un único campo
+SELECT CONCAT(cancion, ' - ', artista) AS 'cancion y artista'
+FROM musica_2;
+
+
+#2. COALESCE
+#Mostrar el email o "Sin contacto" si es NULL
+SELECT COALESCE(email_contacto, 'Sin contacto') AS contacto FROM musica_2;
+
+#3. DATEDIFF
+#Mostrar cuántos días pasaron desde el lanzamiento de cada canción
+SELECT DATEDIFF('2025-05-21', fecha_lanzamiento) AS dias_desde_lanzamiento FROM musica_2;
+
+
+ #4. TIMEDIFF
+ #Mostrar cuánto tiempo pasó desde la hora de estreno hasta las 23:59:59;
+ SELECT TIMEDIFF('23:59:59', hora_estreno) AS tiempo_final_dia from musica_2;
+ 
+ #5. EXTRACT
+#Extraer el año de la fecha de lanzamiento
+SELECT EXTRACT(YEAR FROM fecha_lanzamiento) AS anio FROM musica_2;
+
+
+#6 REPLACE
+# Reemplazar la palabra "gratis" por "sin costo" en las descripciones
+SELECT REPLACE(descripcion, 'gratis', 'sin costo') AS descripcion FROM musica_2;
+
+#7 DATE_FORMAT
+# Mostrar la fecha de lanzamiento con formato día/mes/año
+SELECT DATE_FORMAT(fecha_lanzamiento, '%d/%m/%Y') AS fecha_lanzamiento1 from musica_2;
+
+#8. DATE_ADD
+# Calcular la fecha de vencimiento de promoción agregando 30 días a la fecha de lanzamiento
+ SELECT cancion, DATE_ADD(fecha_lanzamiento, INTERVAL 30 DAY) AS promocion from musica_2;
+
+#9. DATE_SUB
+# Mostrar una fecha 15 días antes del lanzamiento
+ SELECT fecha_lanzamiento, DATE_SUB(fecha_lanzamiento, INTERVAL 15 DAY) AS fecha_anterior from musica_2;
+ 
+ #10. CASE
+# Clasificar la duración de cada tema como Corta, Media o Larga
+SELECT duracion,
+  CASE 
+    WHEN duracion < 180 THEN 'Corta'
+    WHEN duracion >= 180 AND duracion < 240 THEN 'Media'
+    ELSE 'Larga'
+  END AS categoria
+FROM musica_2;
+
+
+#11 Agregaciones: COUNT, AVG, SUM, MIN, MAX
+#Cantidad total de canciones
+#Promedio de duración
+#Suma total de duración
+#Canción más corta
+#Canción más larga
+
+SELECT
+    COUNT(*) AS cantidad_total_canciones
+FROM musica_2;
+
+SELECT
+    avg(duracion) AS promedio_Canciones
+FROM musica_2;
+
+SELECT
+    sum(duracion) AS promedio_Canciones
+FROM musica_2;
+
+SELECT min(cancion) as nombre, min(duracion) AS cancion_mas_corta
+FROM musica_2;
+
+SELECT max(cancion) as nombre, max(duracion) AS cancion_mas_larga
+FROM musica_2;
+
+#12 GROUP BY + agregaciones
+# Duración promedio por año
+SELECT anio, avg(duracion) AS promedio_Canciones 
+from musica_2
+group by anio;
+
+
+
+
+
+
+-----------------------------------------------------------------
+
+
+
+
+
+  # 1)Devuelve un listado con el código de oficina y la ciudad donde hay oficinas./
+  select codigo_oficina, ciudad from jardin.oficina;
+  
+  #/2)Devuelve un listado con la ciudad y el teléfono de las oficinas de España./
+  select ciudad, telefono from jardin.oficina where pais="españa";
+  
+  #/*3)Devuelve un listado con el nombre, apellidos y email de los empleados cuyo jefe tiene un 
+#código de jefe igual a 7.*/
+select nombre, CONCAT(apellido1, ' - ', apellido2) as apellidos, email from jardin.empleado where codigo_jefe = 7;
+  
+  #/4)Devuelve el nombre del puesto, nombre, apellidos y email del jefe de la empresa./
+  select puesto, nombre, CONCAT(apellido1, ' - ', apellido2) as apellidos, email from jardin.empleado where puesto = "Director General";
+  
+  #/*5)Devuelve un listado con el nombre, apellidos y puesto de aquellos empleados que no sean 
+  #representantes de ventas.*/
+  
+    select nombre, CONCAT(apellido1, ' - ', apellido2) as apellidos, puesto from jardin.empleado where not puesto <> "Representantes ventas";
+
+#/6)Devuelve un listado con el nombre de todos los clientes españoles./
+
+select nombre_cliente, pais
+FROM cliente
+WHERE pais = 'spain';
+
+#/*10)Devuelve un listado con el código de pedido, código de cliente, fecha esperada y fecha de 
+#entrega de los pedidos cuya fecha de entrega ha sido al menos dos días antes de la fecha 
+#esperada.
+# Utilizando la función ADDDATE de MySQL.
+# Utilizando la función DATEDIFF de MySQL.
+# ¿Sería posible resolver esta consulta utilizando el operador de suma + o resta -?*/
+#/ Utilizando la función ADDDATE de MySQL./
+
+select codigo_pedido, codigo_cliente, fecha_esperada, fecha_entrega 
+from jardin.pedido
+where fecha_entrega = (fecha_esperada - 2);
+
+select codigo_cliente, codigo_pedido, fecha_esperada, fecha_entrega 
+from pedido where fecha_entrega = adddate(fecha_esperada, -2);
+
+select codigo_cliente, codigo_pedido, fecha_esperada, fecha_entrega 
+from pedido where datediff(fecha_esperada, fecha_entrega)= 2;
+
+select codigo_cliente, codigo_pedido, fecha_esperada, fecha_entrega 
+from pedido where fecha_entrega = fecha_esperada - interval 2 day;
+
+
+
+
