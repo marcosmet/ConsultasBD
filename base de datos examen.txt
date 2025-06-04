@@ -1,0 +1,67 @@
+-- TABLA DE LOS PROVEEDORES
+CREATE TABLE Proveedor (
+    CUIT VARCHAR(15) PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Direccion VARCHAR(200),
+    Telefono VARCHAR(20),
+    PaginaWeb VARCHAR(100)
+);
+
+-- TABLA DE LOS CLIENTE
+CREATE TABLE Cliente (
+    CUIT VARCHAR(15) PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Calle VARCHAR(100),
+    Numero INT,
+    Localidad VARCHAR(100),
+    Ciudad VARCHAR(100)
+);
+
+-- TABLA DE TELEFONOS DEL CLIENTE 
+CREATE TABLE TelefonoCliente (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ClienteCUIT VARCHAR(15),
+    Telefono VARCHAR(20),
+    FOREIGN KEY (ClienteCUIT) REFERENCES Cliente(CUIT)
+);
+
+-- CATEGORIA DE LOS MUEBLES
+CREATE TABLE Categoria (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(50) NOT NULL,
+    Descripcion VARCHAR(255)
+);
+
+-- MUEBLES QUE VENDE LA MUEBLERIA
+CREATE TABLE Mueble (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    PrecioActual DECIMAL(10,2),
+    Stock INT,
+    ProveedorCUIT VARCHAR(15),
+    CategoriaID INT,
+    FOREIGN KEY (ProveedorCUIT) REFERENCES Proveedor(CUIT),
+    FOREIGN KEY (CategoriaID) REFERENCES Categoria(ID)
+);
+
+-- VENTAS REALIZADAS POR LA MUEBLERIA
+CREATE TABLE Venta (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Fecha DATETIME NOT NULL,
+    ClienteCUIT VARCHAR(15),
+    PorcentajeDescuento DECIMAL(5,2),
+    MontoFinal DECIMAL(10,2),
+    FOREIGN KEY (ClienteCUIT) REFERENCES Cliente(CUIT)
+);
+
+-- DETALLE DE CADA MUEBLE VENDIDO
+CREATE TABLE DetalleVenta (
+    VentaID INT,
+    MuebleID INT,
+    PrecioEnVenta DECIMAL(10,2),
+    Cantidad INT,
+    MontoParcial DECIMAL(10,2),
+    PRIMARY KEY (VentaID, MuebleID),
+    FOREIGN KEY (VentaID) REFERENCES Venta(ID),
+    FOREIGN KEY (MuebleID) REFERENCES Mueble(ID)
+);
